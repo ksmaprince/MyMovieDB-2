@@ -30,7 +30,9 @@ fun HomeScreen(viewModel: MovieViewModel, navController: NavController) {
     viewModel.movie.observeForever {
         movies = it.results
     }
-    viewModel.fetchMovies("f6c06b6a1cc549d810d4fb194b9d7633", 1)
+    LaunchedEffect(Unit) {
+        viewModel.fetchMovies("f6c06b6a1cc549d810d4fb194b9d7633", 1)
+    }
     Column {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -61,7 +63,11 @@ fun MovieItem(movieInfo: MovieInfo, viewModel: MovieViewModel, navController: Na
             Modifier.fillMaxWidth(),
             contentScale = ContentScale.Crop
         )
-        Column(Modifier.fillMaxWidth().height(100.dp).padding(4.dp)) {
+        Column(
+            Modifier
+                .fillMaxWidth()
+                .height(100.dp)
+                .padding(4.dp)) {
             Text(
                 text = movieInfo.title, style = MaterialTheme.typography.titleMedium
             )
